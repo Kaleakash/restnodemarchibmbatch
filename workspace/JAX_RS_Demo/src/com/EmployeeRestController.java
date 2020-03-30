@@ -67,6 +67,20 @@ public class EmployeeRestController {
 	@Path("empDb")
 	public List<Employee> getEmployeeInfoFromDb() {
 		EmployeeDao ed = new EmployeeDao();
+		System.out.println("in rest method");
 		return ed.getEmployeeDbInfo();
+	}
+	
+	@POST
+	@Consumes(value=MediaType.APPLICATION_JSON)
+	@Produces(value=MediaType.TEXT_PLAIN)
+	@Path("empStoreDb")
+	public String empStoreDb(Employee emp) {
+			EmployeeDao ed = new EmployeeDao();
+			if(ed.storeEmployeeInfo(emp)>0) {
+				return "Record stored successfully";
+			}else {
+				return "Record not store";
+			}
 	}
 }
